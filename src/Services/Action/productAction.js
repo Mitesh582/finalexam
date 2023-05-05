@@ -1,5 +1,5 @@
 import { Api } from "../../Component/Api/BaseUrl";
-import { CREATE_PRODUCT, GET_PRODUCTS, GET_PRODUCT } from '../Constant/actionType'
+import { CREATE_PRODUCT, GET_PRODUCTS, GET_PRODUCT, ADD_TO_CART } from '../Constant/actionType'
 
 export const CreateProduct = (data) => {
     return {
@@ -36,9 +36,22 @@ export const getProduct = (data) => {
     }
 }
 export const getProductAsync = (id) => {
-
+    
     return async dispatch => {
         const res = await Api.get(`/Products/${id}`)
         dispatch(getProduct(res.data))
+    }
+}
+export const AddToCart = (data) => {
+    return {
+        type: ADD_TO_CART,
+        payload: data
+    }
+}
+export const AddToCartAsync = (id) => {
+    
+    return async dispatch => {
+        const res = await Api.get(`/Products/${id}`)
+        dispatch(AddToCart(res.data))
     }
 }

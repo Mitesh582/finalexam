@@ -1,9 +1,12 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
 import { Cart2 } from 'react-bootstrap-icons'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 function Header() {
+
+    const { CartItems } = useSelector(state => state.productReducer)
+    console.log(CartItems);
 
     return (
         <>
@@ -35,9 +38,16 @@ function Header() {
                             </ul>
                         </nav>
                         <div className='cta col-2 mx-4' >
-                            <Button variant='primary'>
-                                <Cart2 />
-                            </Button>
+                            <NavLink to='/cart'>
+                                <button type="button" class="btn btn-primary position-relative">
+                                    <Cart2 className='fs-4' />
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {
+                                            CartItems.length
+                                        }
+                                    </span>
+                                </button>
+                            </NavLink>
                         </div>
                     </div>
                 </div>

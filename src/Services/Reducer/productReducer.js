@@ -1,9 +1,10 @@
-import { CREATE_PRODUCT, GET_PRODUCTS, GET_PRODUCT } from '../Constant/actionType'
+import { CREATE_PRODUCT, GET_PRODUCTS, GET_PRODUCT, ADD_TO_CART } from '../Constant/actionType'
 
 const initialState = {
     Products: [],
     Product: {},
     isEdit: false,
+    CartItems: []
 }
 
 const productReducer = (state = initialState, action) => {
@@ -29,7 +30,13 @@ const productReducer = (state = initialState, action) => {
                 isEdit: true
             }
             break;
-            
+
+        case ADD_TO_CART:
+            return {
+                ...state,
+                CartItems: [...state.CartItems, action.payload],
+                isEdit: false
+            };
         default:
             return state;
             break;
